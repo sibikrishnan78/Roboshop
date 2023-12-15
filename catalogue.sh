@@ -20,8 +20,8 @@ echo -e "\e[35m>>>>>>>>>system restart<<<<<<<<<<\e[0m"
 systemctl daemon-reload
 systemctl enable catalogue
 systemctl restart catalogue
-echo -e "\e[35m>>>>>>>>>load schema<<<<<<<<<<\e[0m"
+echo -e "\e[35m>>>>>>>>>install mongodb shell<<<<<<<<<<\e[0m"
 cp /home/centos/Roboshop/mongo.repo /etc/yum.repos.d/mongo.repo
 dnf install mongodb-org-shell -y
-echo -e "\e[35m>>>>>>>>>install mongodb shell<<<<<<<<<<\e[0m"
+echo -e "\e[35m>>>>>>>>>load schema<<<<<<<<<<\e[0m"
 mongo --host mongodb.deveng23.online </app/schema/catalogue.js

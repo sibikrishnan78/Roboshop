@@ -9,10 +9,10 @@ cd /app
 unzip /tmp/catalogue.zip
 cd /app
 npm install
-cp Roboshop/catalogue.service /etc/systemd/system/catalogue.service
+cp /home/centos/Roboshop/catalogue.service /etc/systemd/system/catalogue.service
 systemctl daemon-reload
 systemctl enable catalogue
 systemctl restart catalogue
-cp Roboshop/mongo.repo /etc/yum.repos.d/mongo.repo
+cp /home/centos/Roboshop/mongo.repo /etc/yum.repos.d/mongo.repo
 dnf install mongodb-org-shell -y
 mongo --host mongodb.deveng23.online </app/schema/catalogue.js

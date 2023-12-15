@@ -14,6 +14,5 @@ npm install
 systemctl daemon-reload
 systemctl enable catalogue
 systemctl start catalogue
-cp mongo.repo /etc/yum.repos.d/mongo.repo
 dnf install mongodb-org-shell -y
 mongo --host mongodb.deveng23.online </app/schema/catalogue.js

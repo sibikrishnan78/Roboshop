@@ -9,12 +9,12 @@ rm -rf /app
 echo -e "\e[35m>>>>>>>>>creating directory<<<<<<<<<<\e[0m"
 mkdir /app
 curl -L -o /tmp/user.zip https://roboshop-artifacts.s3.amazonaws.com/user.zip
-echo -e "\e[35m>>>>>>>>>unzipping catalogue<<<<<<<<<<\e[0m"
+echo -e "\e[35m>>>>>>>>>unzipping user<<<<<<<<<<\e[0m"
 cd /app
 unzip /tmp/user.zip
 echo -e "\e[35m>>>>>>>>>npm install<<<<<<<<<<\e[0m"
 npm install
-echo -e "\e[35m>>>>>>>>>copy catalogue service file<<<<<<<<<<\e[0m"
+echo -e "\e[35m>>>>>>>>>copy user service file<<<<<<<<<<\e[0m"
 cp /home/centos/Roboshop/user.service /etc/systemd/system/user.service
 echo -e "\e[35m>>>>>>>>>system restart<<<<<<<<<<\e[0m"
 systemctl daemon-reload

@@ -4,3 +4,6 @@ source $script_path/common.sh
 component=cart
 
 function_nodejs
+function_adduser
+function_restart
+

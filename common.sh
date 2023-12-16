@@ -25,9 +25,6 @@ function_adduser() {
     function_colour "unzipping cart"
     cd /app
     unzip /tmp/${component}.zip
-
-    function_colour "npm install"
-    npm install
 }
 
 function_restart() {

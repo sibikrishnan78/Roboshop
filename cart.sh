@@ -1,4 +1,6 @@
-source common.sh
+script=$(realpath "$0")
+script_path=$(dirname"$script")
+source $script_path/common.sh
 
 dnf module disable nodejs -y
 dnf module enable nodejs:18 -y
@@ -16,7 +18,7 @@ unzip /tmp/cart.zip
 echo -e "\e[35m>>>>>>>>>npm install<<<<<<<<<<\e[0m"
 npm install
 echo -e "\e[35m>>>>>>>>>copy cart service file<<<<<<<<<<\e[0m"
-cp /home/centos/Roboshop/cart.service /etc/systemd/system/cart.service
+cp $script_path/cart.service /etc/systemd/system/cart.service
 echo -e "\e[35m>>>>>>>>>system restart<<<<<<<<<<\e[0m"
 systemctl daemon-reload
 systemctl enable cart

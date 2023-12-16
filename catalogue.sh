@@ -6,6 +6,10 @@ component=catalogue
 
 function_nodejs
 function_adduser
+
+function_colour "npm install"
+npm install
+
 function_restart
 
 

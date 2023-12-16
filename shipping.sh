@@ -1,4 +1,6 @@
-source common.sh
+script=$(realpath "$0")
+script_path=$(dirname "$script")
+source $script_path/common.sh
 
 echo -e "\e[35m>>>>>>>>>Install maven<<<<<<<<<<\e[0m"
 dnf install maven -y
@@ -13,7 +15,7 @@ unzip /tmp/shipping.zip
 mvn clean package
 mv target/shipping-1.0.jar shipping.jar
 echo -e "\e[35m>>>>>>>>>copying service file<<<<<<<<<<\e[0m"
-cp /home/centos/Roboshop/shipping.service /etc/systemd/system/shipping.service
+cp $script_path/shipping.service /etc/systemd/system/shipping.service
 echo -e "\e[35m>>>>>>>>>Restart<<<<<<<<<<\e[0m"
 systemctl daemon-reload
 systemctl enable shipping

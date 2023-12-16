@@ -1,4 +1,6 @@
-source common.sh
+script=$(realpath "$0")
+script_path=$(dirname "$script")
+source $script_path/common.sh
 
 echo -e "\e[35m>>>>>>>>>Install python<<<<<<<<<<\e[0m"
 dnf install python36 gcc python3-devel -y
@@ -13,7 +15,7 @@ cd /app
 unzip /tmp/payment.zip
 echo -e "\e[35m>>>>>>>>>Install pip<<<<<<<<<<\e[0m"
 pip3.6 install -r requirements.txt
-cp /home/centos/Roboshop/payment.service /etc/systemd/system/payment.service
+cp $script_path/payment.service /etc/systemd/system/payment.service
 echo -e "\e[35m>>>>>>>>>Restart<<<<<<<<<<\e[0m"
 systemctl daemon-reload
 systemctl enable payment

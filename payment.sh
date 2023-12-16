@@ -1,7 +1,9 @@
+source common.sh
+
 echo -e "\e[35m>>>>>>>>>Install python<<<<<<<<<<\e[0m"
 dnf install python36 gcc python3-devel -y
 echo -e "\e[35m>>>>>>>>>Useradd<<<<<<<<<<\e[0m"
-useradd roboshop
+useradd ${user_add}
 rm -rf /app
 mkdir /app
 echo -e "\e[35m>>>>>>>>>payment service<<<<<<<<<<\e[0m"

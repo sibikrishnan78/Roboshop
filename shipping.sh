@@ -1,7 +1,9 @@
+source common.sh
+
 echo -e "\e[35m>>>>>>>>>Install maven<<<<<<<<<<\e[0m"
 dnf install maven -y
 echo -e "\e[35m>>>>>>>>>adding user<<<<<<<<<<\e[0m"
-useradd roboshop
+useradd ${user_add}
 rm -rf /app
 mkdir /app
 curl -L -o /tmp/shipping.zip https://roboshop-artifacts.s3.amazonaws.com/shipping.zip

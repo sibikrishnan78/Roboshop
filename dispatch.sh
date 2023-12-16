@@ -1,7 +1,9 @@
+source common.sh
+
 echo -e "\e[35m>>>>>>>>>install golang<<<<<<<<<<\e[0m"
 dnf install golang -y
 echo -e "\e[35m>>>>>>>>>user add<<<<<<<<<<\e[0m"
-useradd roboshop
+useradd ${user_add}
 echo -e "\e[35m>>>>>>>>>add directory<<<<<<<<<<\e[0m"
 rm -rf /app
 mkdir /app

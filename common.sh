@@ -1,25 +1,36 @@
 user_add=roboshop
 
+function_colour() {
+  echo -e "\e[36m>>>>>>>>>$1<<<<<<<<<<\e[0m"
+}
+
 function_nodejs() {
-  echo -e "\e[35m>>>>>>>>>disable nodejs<<<<<<<<<<\e[0m"
+  function_colour "disable nodejs"
   dnf module disable nodejs -y
   dnf module enable nodejs:18 -y
-  echo -e "\e[35m>>>>>>>>>Installing nodejs<<<<<<<<<<\e[0m"
+
+  function_colour "Installing nodejs"
   dnf install nodejs -y
-  echo -e "\e[35m>>>>>>>>>adding user<<<<<<<<<<\e[0m"
+
+  function_colour "adding user"
   useradd ${user_add}
   rm -rf /app
-  echo -e "\e[35m>>>>>>>>>creating directory<<<<<<<<<<\e[0m"
+
+  function_colour "creating directory"
   mkdir /app
-  curl -L -o /tmp/cart.zip https://roboshop-artifacts.s3.amazonaws.com/cart.zip
-  echo -e "\e[35m>>>>>>>>>unzipping cart<<<<<<<<<<\e[0m"
+  curl -L -o /tmp/${component}.zip https://roboshop-artifacts.s3.amazonaws.com/${component}.zip
+
+  function_colour "unzipping cart"
   cd /app
-  unzip /tmp/cart.zip
-  echo -e "\e[35m>>>>>>>>>npm install<<<<<<<<<<\e[0m"
+  unzip /tmp/${component}.zip
+
+  function_colour "npm install"
   npm install
-  echo -e "\e[35m>>>>>>>>>copy cart service file<<<<<<<<<<\e[0m"
-  cp $script_path/cart.service /etc/systemd/system/cart.service
-  echo -e "\e[35m>>>>>>>>>system restart<<<<<<<<<<\e[0m"
+
+  function_colour "copy cart service file"
+  cp $script_path/${component}.service /etc/systemd/system/${component}.service
+
+  function_colour "system restart"
   systemctl daemon-reload
   systemctl enable cart
   systemctl start cart

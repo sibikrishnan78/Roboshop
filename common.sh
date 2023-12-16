@@ -32,6 +32,6 @@ function_nodejs() {
 
   function_colour "system restart"
   systemctl daemon-reload
-  systemctl enable cart
-  systemctl start cart
+  systemctl enable ${component}
+  systemctl restart ${component}
 }

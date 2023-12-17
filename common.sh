@@ -3,7 +3,7 @@ user_add=roboshop
 function_colour() {
   echo -e "\e[36m>>>>>>>>>$1<<<<<<<<<<\e[0m"
 }
-function_stat_check() {
+function_stat_check(){
   if[ $1 -eq 0]; then
         echo -e "\e[32msuccess\e[0m"
       else

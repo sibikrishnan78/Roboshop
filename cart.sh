@@ -6,8 +6,7 @@ component=cart
 function_nodejs
 function_adduser
 
-function_colour "npm install"
-npm install
+function_npm
 
 function_restart
 

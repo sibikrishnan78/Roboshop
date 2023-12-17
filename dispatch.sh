@@ -5,6 +5,7 @@ component=dispatch
 
 function_colour "install golang"
 dnf install golang -y
+function_stat_check $?
 
 function_adduser
 
@@ -12,5 +13,6 @@ function_colour "go mods"
 go mod init dispatch
 go get
 go build
+function_stat_check $?
 
 function_restart

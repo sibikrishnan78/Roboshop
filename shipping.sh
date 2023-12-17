@@ -11,11 +11,13 @@ fi
 
 function_colour "Install maven"
 dnf install maven -y
+function_stat_check $?
 
 function_adduser
 
 mvn clean package
 mv target/shipping-1.0.jar shipping.jar
+function_stat_check $?
 
 function_restart
 
@@ -23,3 +25,4 @@ function_colour "load schema"
 dnf install mysql -y
 mysql -h mysql.deveng23.online -uroot -p${my_sql_password} < /app/schema/shipping.sql
 systemctl restart shipping
+function_stat_check $?

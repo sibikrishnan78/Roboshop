@@ -11,11 +11,13 @@ fi
 
 function_colour "Install python"
 dnf install python36 gcc python3-devel -y
+function_stat_check $?
 
 function_adduser
 
 function_colour "Install pip"
 pip3.6 install -r requirements.txt
+function_stat_check $?
 
 function_colour "copy ${component} service file"
 sed -i -e 's|rabbitmq_appuser_password|${rabbitmq_appuser_password}' $script_path/${component}.service
@@ -25,3 +27,4 @@ function_colour "system restart"
 systemctl daemon-reload
 systemctl enable ${component}
 systemctl restart ${component}
+function_stat_check $?

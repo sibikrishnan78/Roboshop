@@ -3,7 +3,7 @@ script_path=$(dirname "$script")
 source $script_path/common.sh
 my_sql_password=$1
 
-if [ -z "$my_sql_password"]; then
+if [ -z "$my_sql_password" ]; then
   echo Input missing
   exit
 fi

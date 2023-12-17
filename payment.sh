@@ -1,22 +1,27 @@
 script=$(realpath "$0")
 script_path=$(dirname "$script")
 source $script_path/common.sh
+component=payment
+rabbitmq_appuser_password=$1
 
-echo -e "\e[35m>>>>>>>>>Install python<<<<<<<<<<\e[0m"
+if [ -z "$rabbitmq_appuser_password"]; then
+  echo Input missing
+  exit
+fi
+
+function_colour "Install python"
 dnf install python36 gcc python3-devel -y
-echo -e "\e[35m>>>>>>>>>Useradd<<<<<<<<<<\e[0m"
-useradd ${user_add}
-rm -rf /app
-mkdir /app
-echo -e "\e[35m>>>>>>>>>payment service<<<<<<<<<<\e[0m"
-curl -L -o /tmp/payment.zip https://roboshop-artifacts.s3.amazonaws.com/payment.zip
-echo -e "\e[35m>>>>>>>>>unzip payment<<<<<<<<<<\e[0m"
-cd /app
-unzip /tmp/payment.zip
-echo -e "\e[35m>>>>>>>>>Install pip<<<<<<<<<<\e[0m"
+
+function_adduser
+
+function_colour "Install pip"
 pip3.6 install -r requirements.txt
-cp $script_path/payment.service /etc/systemd/system/payment.service
-echo -e "\e[35m>>>>>>>>>Restart<<<<<<<<<<\e[0m"
+
+function_colour "copy ${component} service file"
+sed -i -e 's|rabbitmq_appuser_password|${rabbitmq_appuser_password}' $script_path/${component}.service
+cp $script_path/${component}.service /etc/systemd/system/${component}.service
+
+function_colour "system restart"
 systemctl daemon-reload
-systemctl enable payment
-systemctl start payment
+systemctl enable ${component}
+systemctl restart ${component}

@@ -1,11 +1,19 @@
-echo -e "\e[35m>>>>>>>>>installing repos<<<<<<<<<<\e[0m"
+source common.sh
+rabbitmq_appuser_password=$1
+
+if [ -z "$rabbitmq_appuser_password"]; then
+  echo Input missing
+  exit
+fi
+
+function_colour "installing repos"
 curl -s https://packagecloud.io/install/repositories/rabbitmq/erlang/script.rpm.sh | bash
 curl -s https://packagecloud.io/install/repositories/rabbitmq/rabbitmq-server/script.rpm.sh | bash
-echo -e "\e[35m>>>>>>>>>install rabbitmq<<<<<<<<<<\e[0m"
+function_colour "install rabbitmq"
 dnf install rabbitmq-server -y
-echo -e "\e[35m>>>>>>>>>Restart<<<<<<<<<<\e[0m"
+function_colour "Restart"
 systemctl enable rabbitmq-server
 systemctl start rabbitmq-server
-echo -e "\e[35m>>>>>>>>>user<<<<<<<<<<\e[0m"
-rabbitmqctl add_user roboshop roboshop123
+function_colour "user"
+rabbitmqctl add_user roboshop ${rabbitmq_appuser_password}
 rabbitmqctl set_permissions -p / roboshop ".*" ".*" ".*"

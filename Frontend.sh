@@ -1,13 +1,15 @@
-echo -e "\e[35m>>>>>>>>>Install nginx<<<<<<<<<<\e[0m"
+source common.sh
+
+function_colour "Install nginx"
 dnf install nginx -y
-echo -e "\e[35m>>>>>>>>>copy roboshop file<<<<<<<<<<\e[0m"
+function_colour "copy roboshop file"
 cp roboshop.conf /etc/nginx/default.d/roboshop.conf
 rm -rf /usr/share/nginx/html/*
-echo -e "\e[35m>>>>>>>>>downloading zip file<<<<<<<<<<\e[0m"
+function_colour "downloading zip file"
 curl -o /tmp/frontend.zip https://roboshop-artifacts.s3.amazonaws.com/frontend.zip
 cd /usr/share/nginx/html
-echo -e "\e[35m>>>>>>>>>unzipping zip file<<<<<<<<<<\e[0m"
+function_colour "unzipping zip file"
 unzip /tmp/frontend.zip
-echo -e "\e[35m>>>>>>>>>system restart<<<<<<<<<<\e[0m"
+function_colour "system restart"
 systemctl enable nginx
 systemctl restart nginx

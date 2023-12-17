@@ -1,10 +1,20 @@
-echo -e "\e[35m>>>>>>>>>disabling mysql<<<<<<<<<<\e[0m"
+script=$(realpath "$0")
+script_path=$(dirname "$script")
+source $script_path/common.sh
+my_sql_password=$1
+
+if [ -z "$my_sql_password"]; then
+  echo Input missing
+  exit
+fi
+
+function_colour "disabling mysql"
 dnf module disable mysql -y
-cp /home/centos/Roboshop/mysql.repo /etc/yum.repos.d/mysql.repo
-echo -e "\e[35m>>>>>>>>>install mysql<<<<<<<<<<\e[0m"
+cp ${script_path}/mysql.repo /etc/yum.repos.d/mysql.repo
+function_colour "install mysql"
 dnf install mysql-community-server -y
-echo -e "\e[35m>>>>>>>>>restart<<<<<<<<<<\e[0m"
+function_colour "restart"
 systemctl enable mysqld
 systemctl restart mysqld
-echo -e "\e[35m>>>>>>>>>user<<<<<<<<<<\e[0m"
-mysql_secure_installation --set-root-pass RoboShop@1
+function_colour "user"
+mysql_secure_installation --set-root-pass ${my_sql_password}

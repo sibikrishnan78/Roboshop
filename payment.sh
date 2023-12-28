@@ -16,6 +16,7 @@ function_stat_check $?
 function_adduser
 
 function_colour "Install pip"
+cd /app
 pip3.6 install -r requirements.txt
 function_stat_check $?
 
